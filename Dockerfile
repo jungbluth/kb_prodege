@@ -11,6 +11,9 @@ WORKDIR /kb/module/bin
 # To install all the dependencies
 RUN apt-get update && apt-get install -y wget r-base gcc
 
+# install perl and packages
+RUN conda install -c bioconda perl-bioperl
+
 RUN echo "install.packages(\"bigmemory\", repos=\"https://cran.rstudio.com\")" | R --no-save
 RUN echo "install.packages(\"biganalytics\", repos=\"https://cran.rstudio.com\")" | R --no-save
 
