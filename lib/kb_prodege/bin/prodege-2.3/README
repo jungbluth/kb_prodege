@@ -1,0 +1,77 @@
+############################################################################################################
+# ProDeGe Copyright (c) 2014, The Regents of the University of California, through Lawrence
+# Berkeley National Laboratory (subject to receipt of any required approvals from the U.S.
+# Dept. of Energy).  All rights reserved.
+# 
+# If you have questions about your rights to use or distribute this software, please contact
+# Berkeley Lab's Innovation & Partnerships Office at  IPO@lbl.gov referring to " ProDeGe (LBNL Ref 2015-021)."
+# 
+# NOTICE.  This software was developed under funding from the U.S. Department of Energy.  As
+# such, the U.S. Government has been granted for itself and others acting on its behalf a paid-up,
+# nonexclusive, irrevocable, worldwide license in the Software to reproduce, prepare derivative works,
+# and perform publicly and display publicly.  Beginning five (5) years after the date permission to
+# assert copyright is obtained from the U.S. Department of Energy, and subject to any subsequent five
+# (5) year renewals, the U.S. Government is granted for itself and others acting on its behalf a paid-up,
+# nonexclusive, irrevocable, worldwide license in the Software to reproduce, prepare derivative works,
+# distribute copies to the public, perform publicly and display publicly, and to permit others to do so.
+############################################################################################################
+
+ProDeGe 2.3: a computational Protocol for fully-automated Decontamination of Genomes
+
+PURPOSE
+The purpose of this software is to decontaminate single amplified genomes and genomes assembled from metagenomes.
+
+REQUIREMENTS
+The user must have this software previously installed before running the install
+script:
+- Blast+ 2.2.28
+- Perl 5.16.0 (with modules Bio::SeqIO and Bio::Perl)
+- Prodigal 2.50
+- R 3.0.1
+The BLASTN_EXE envirnonmental variable is used to run blastn, R_EXE to run R,
+and PRODIGAL_EXE to run prodigal. Else, please use 'module load' to set up your environment.
+
+INPUT/OUTPUT
+ProDeGe takes as input a fasta file that includes contigs from contaminant origin and the taxonomy of the 
+target organism, and creates a fasta file including only the contigs from the target organism. Several 
+intermediary files are created during the process.
+
+INSTALL
+To install the code unzip the tar and run the install script: 
+tar xvzf prodege-X.X.tgz
+Inside the prodege-X.X directory type:
+sh prodege_install.sh
+Required arguments: 
+  -i <full path install location> 
+For help:
+  -h
+The install script will download and install the blast databases. 
+
+RUNNING
+prodege.sh <configuration file>
+
+CONFIGURATION
+The program takes as input a configuration file. Below are the fields that should be in the file:
+TAXON_DISPLAY_NAME=         # This field is not required, put quotes around if spaces
+TAXON_DOMAIN=               # Put quotes around taxon var assignments
+TAXON_PHYLUM=               # because some have spaces in them
+TAXON_CLASS=                # like "Bacteroidetes/Chlorobi group"
+TAXON_ORDER=                # TAXON_X can be blank
+TAXON_FAMILY=
+TAXON_GENUS=            
+INSTALL_LOCATION=           # Do not set this if you are using 'module load prodege'
+WORKING_DIR=                # Prodege will create a folder $JOB_NAME in $WORKING_DIR
+IN_FASTA=		    # Full path of input fna
+JOB_NAME=                   # Clean fasta file will be: ${WORKING_DIR}/${JOB_NAME}/${JOB_NAME}_output_clean.fna
+RUN_GENECALL=<0 to skip, 1 to run>
+RUN_BLAST=<0 to skip, 1 to run>
+RUN_CLASSIFY=<0 to skip, 1 to run>
+RUN_ACCURACY=<0 to skip, 1 to run>  #contigs must have "clean" or "contam" in their fasta's contig name
+BLAST_THREADS=                      #Default is 8 
+KMER_CUTOFF=			    #Prodege is precalibrated with a cutoff, this field is optional
+	
+EXAMPLE
+Two examples are included in the Examples folder.  The config.cfg needs to be updated with the install location and
+the working directory.  To run the example type:
+prodege.sh <config file>
+

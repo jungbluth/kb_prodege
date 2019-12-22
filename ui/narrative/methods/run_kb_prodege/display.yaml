@@ -1,0 +1,76 @@
+#
+# define display information
+#
+name     : Predict prodege and biogeochemical functional traits using METABOLIC - v2.0
+subtitle : predict prodege and biogeochemical traits
+tooltip  : predict prodege and biogeochemical traits
+
+icon: METABOLIC_icon.png
+
+screenshots:
+    - METABOLIC_banner.png
+    - METABOLIC_workflow.png
+
+#
+# define a set of similar methods that might be useful to the user
+#
+suggestions:
+    apps:
+        related:
+            [kb_hmmer]
+        next:
+            []
+    methods:
+        related:
+            []
+        next:
+            ["HMMER_EnvBioelement_Search", "HMMER_dbCAN_Search", "HMMER_MSA_Search", "HMMER_Local_MSA_Group_Search"]
+
+#
+# Configure the display and description of parameters
+#
+parameters :
+    inputObjectRef :
+        ui-name : |
+            Input assembly, genome, or set
+        short-hint : |
+            An assembly, genome or set
+        long-hint  : |
+            A single assembly or genome object or an assembly set or genome set.
+
+    reads_list :
+        ui-name : Reads (optional)
+        short-hint : A list of reads object (PairedEndLibrary/SingleEndLibrary) upon which METABOLIC will be run
+        long-hint  : A list of reads object (PairedEndLibrary/SingleEndLibrary) upon which METABOLIC will be run
+
+    prodigal_method :
+        ui-name : |
+            Prodigal Gene Calling Mode
+        short-hint : |
+            Prodigal genes calling: meta or single mode
+        long-hint  : |
+            Prodigal genes calling: meta or single mode
+
+description : |
+    <p>ProDeGe is software that enables automated decontamination of genomes.</p>
+    <p><hr></p>
+    <p><hr></p>
+    <p><i>Implemented for KBase by <a href="mailto:sjungbluth@lbl.gov">Sean Jungbluth(sjungbluth@lbl.gov)</a></i></p>
+    <p><hr></p>
+
+publications:
+    -
+        pmid: 26057843
+        display-text: |
+            Tennessen K, Andersen E, Clingenpeel S, Rinke C, Lundberg DS, Han J, Dangl JL, Ivanova N, Woyke T, Kyrpides N, Pati A. ProDeGe: a computational protocol for fully automated decontamination of genomes. ISME J. 2016;10: 269-272. doi:10.1038/ismej.2015.100
+        link: https://www.ncbi.nlm.nih.gov/pubmed/26057843
+
+    -
+        display-text: |
+            ProDeGe:
+        link: https://jgi.doe.gov/data-and-tools/prodege/
+
+    -
+        display-text: |
+            R: A Language and Environment for Statistical Computing:
+        link: http://www.R-project.org/
