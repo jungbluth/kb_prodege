@@ -14,6 +14,9 @@ RUN apt-get update && apt-get install -y wget r-base gcc
 RUN echo "install.packages(\"bigmemory\", repos=\"https://cran.rstudio.com\")" | R --no-save
 RUN echo "install.packages(\"biganalytics\", repos=\"https://cran.rstudio.com\")" | R --no-save
 
+RUN wget https://github.com/hyattpd/Prodigal/releases/download/v2.6.3/prodigal.linux && mv prodigal.linux /usr/local/bin/prodigal && chmod +x /usr/local/bin/prodigal
+
+RUN wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/*-x64-linux.tar.gz && tar xzf *-x64-linux.tar.gz && sh -c "find . -name 'blastn' -exec mv {} /usr/local/bin/ \;" && rm -rf ncbi-blast*
 COPY ./ /kb/module
 
 RUN mkdir -p /kb/module/work
