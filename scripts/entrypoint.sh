@@ -24,15 +24,17 @@ elif [ "${1}" = "init" ] ; then
   tar -xvzf prodege-2.3.tar_.gz
   sed -i 's/\$PCmd/prodigal/' /data/prodege-2.3/bin/prodege.sh
   sed -i 's/\$blastCmd/blastn/' /data/prodege-2.3/bin/prodege.sh
-
+  sed -i 's/use lib /#use lib /' /data/prodege-2.3/bin/prodege_compute_kmer_counts.pl
   sed -i 's/sh \$CURR_DIR.bin.02.getRpackages.sh/#sh \$CURR_DIR\/bin\/02.getRpackages.sh/' /data/prodege-2.3/prodege_install.sh
   # sed -i 's/sh \$CURR_DIR.bin.03.buildDatabases.sh/#sh \$CURR_DIR\/bin\/03.buildDatabases.sh/' /data/prodege-2.3/prodege_install.sh
-  # this next command ignores the installation checks, which are poorly written
+  # this next command ignores the installation checks, which are written too specifically
   head -99 /data/prodege-2.3/prodege_install.sh > ./tmpfile && mv ./tmpfile /data/prodege-2.3/prodege_install.sh && chmod +x /data/prodege-2.3/prodege_install.sh
   sed -i 's/,lib.loc=bin//' /data/prodege-2.3/bin/prodege_classify_cleanandcontam.R
   sed -i 's/,lib.loc=bin//' /data/prodege-2.3/bin/prodege_classify_nobintarget.R
   sed -i 's/,lib.loc=bin//' /data/prodege-2.3/bin/prodege_classify_noclean.R
   sed -i 's/,lib.loc=bin//' /data/prodege-2.3/bin/prodege_classify_nocontam.R
+  sed -i 's/^m=merge.*/m=cbind\(n,1:dim\(n\)\[1\],s\)\[,-3\]/' /Users/sean/Desktop/prodege-2.3/bin/prodege_classify_cleanandcontam.R
+  mv /data/prodege-2.3/lib/LexWords.pm /kb/deployment/lib/LexWords.pm
   cd /data/prodege-2.3
   /data/prodege-2.3/prodege_install.sh -i /data/prodege-2.3
   #if [ -f "/data/METABOLIC/pepunit.lib" ] ; then # need to make sure this file is present, wasn't working
