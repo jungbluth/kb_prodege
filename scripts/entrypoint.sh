@@ -24,7 +24,12 @@ elif [ "${1}" = "init" ] ; then
   tar -xvzf prodege-2.3.tar_.gz
   sed -i 's/\$RCmd/R/' /data/prodege-2.3/bin/02.getRpackages.sh
   sed -i 's/sh \$CURR_DIR.bin.02.getRpackages.sh/#sh \$CURR_DIR\/bin\/02.getRpackages.sh/' /data/prodege-2.3/prodege_install.sh
-  sed -i 's/sh \$CURR_DIR.bin.03.buildDatabases.sh/#sh \$CURR_DIR\/bin\/03.buildDatabases.sh/' /data/prodege-2.3/prodege_install.sh
+  # sed -i 's/sh \$CURR_DIR.bin.03.buildDatabases.sh/#sh \$CURR_DIR\/bin\/03.buildDatabases.sh/' /data/prodege-2.3/prodege_install.sh
+  head -99 /data/prodege-2.3/prodege_install.sh > ./tmpfile && mv ./tmpfile /data/prodege-2.3/prodege_install.sh && chmod +x /data/prodege-2.3/prodege_install.sh
+  sed -i 's/,lib.loc=bin//' /data/prodege-2.3/bin/prodege_classify_cleanandcontam.R
+  sed -i 's/,lib.loc=bin//' /data/prodege-2.3/bin/prodege_classify_nobintarget.R
+  sed -i 's/,lib.loc=bin//' /data/prodege-2.3/bin/prodege_classify_noclean.R
+  sed -i 's/,lib.loc=bin//' /data/prodege-2.3/bin/prodege_classify_nocontam.R
   cd /data/prodege-2.3
   /data/prodege-2.3/prodege_install.sh -i /data/prodege-2.3
   #if [ -f "/data/METABOLIC/pepunit.lib" ] ; then # need to make sure this file is present, wasn't working
