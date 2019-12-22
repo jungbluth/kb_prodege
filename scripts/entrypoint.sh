@@ -23,6 +23,7 @@ elif [ "${1}" = "init" ] ; then
   wget http://1ofdmq2n8tc36m6i46scovo2e-wpengine.netdna-ssl.com/wp-content/uploads/2018/05/prodege-2.3.tar_.gz
   tar -xvzf prodege-2.3.tar_.gz
   sed -i 's/\$RCmd/R/' /data/prodege-2.3/bin/02.getRpackages.sh
+  sed -i 's/sh \$CURR_DIR.bin.02.getRpackages.sh/#sh \$CURR_DIR\/bin\/02.getRpackages.sh/' /data/prodege-2.3/prodege_install.sh
   sed -i 's/sh \$CURR_DIR.bin.03.buildDatabases.sh/#sh \$CURR_DIR\/bin\/03.buildDatabases.sh/' /data/prodege-2.3/prodege_install.sh
   cd /data/prodege-2.3
   /data/prodege-2.3/prodege_install.sh -i /data/prodege-2.3
