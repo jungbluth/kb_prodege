@@ -9,7 +9,7 @@ MAINTAINER Sean Jungbluth <sjungbluth@lbl.gov>
 WORKDIR /kb/module/bin
 
 # To install all the dependencies
-RUN apt-get update && apt-get install -y wget r-base
+RUN apt-get update && apt-get install -y wget r-base gcc
 
 COPY ./ /kb/module
 
