@@ -20,11 +20,10 @@ elif [ "${1}" = "init" ] ; then
   echo "Setting up ProDeGe databases"
   mkdir -p /data
   cd /data
-  mv /kb/module/lib/kb_prodege/bin/prodege-2.3 /data/prodege-2.3
+  cp -R /kb/module/lib/kb_prodege/bin/prodege-2.3 /data/prodege-2.3
 
   # Copy ProDeGe specific perl module to library, need only one of these
-  mv /data/prodege-2.3/lib/LexWords.pm /kb/deployment/lib/LexWords.pm
-  mv /kb/module/lib/kb_prodege/bin/prodege-2.3/lib/LexWords.pm /kb/deployment/lib/LexWords.pm
+  cp /kb/module/lib/kb_prodege/bin/prodege-2.3/lib/LexWords.pm /kb/deployment/lib/LexWords.pm
 
   cd /data/prodege-2.3
   /data/prodege-2.3/prodege_install.sh -i /data/prodege-2.3

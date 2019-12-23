@@ -1,20 +1,18 @@
-#!/usr/bin/env Rscript
-
 #R CMD BATCH -dir -k --no-save kmer.R kmer.out
 #ProDeGe Copyright (c) 2014, The Regents of the University of California,
 #through Lawrence Berkeley National Laboratory (subject to receipt of any
 #required approvals from the U.S. Dept. of Energy).  All rights reserved.
 
 args=commandArgs(trailingOnly=F)
-cutoff=args[length(args)-1]
+cutoff=args[length(args)-1] # cutoff="-DEFAULT"
 cutoff=sub("-","",cutoff)
-jobname=args[length(args)-2]
+jobname=args[length(args)-2]  #jobname="-test"
 jobname=sub("-","",jobname)
-dir=args[length(args)-4]
+dir=args[length(args)-4] # dir="-/data/prodege-2.3/Examples/test/"
 dir=sub("-","",dir)
-k=args[length(args)-3]
+k=args[length(args)-3] # k="-5"
 k=sub("-","",k)
-bin=args[length(args)-5]
+bin=args[length(args)-5] # bin="-/data/prodege-2.3/bin//../lib/"
 bin=sub("-","",bin)
 int_dir=paste(dir,"/",jobname,"_Intermediate/",sep="")
 out_cutoff=paste(int_dir,jobname,"_cutoff",sep="")
