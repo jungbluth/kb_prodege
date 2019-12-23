@@ -22,7 +22,7 @@ elif [ "${1}" = "init" ] ; then
   cd /data
   cp -R /kb/module/lib/kb_prodege/bin/prodege-2.3 /data/prodege-2.3
 
-  cp /data/prodege-2.3/lib/LexWords.pm /kb/deployment/lib/LexWords.pm
+  # cp /data/prodege-2.3/lib/LexWords.pm /kb/deployment/lib/LexWords.pm
 
   cd /data/prodege-2.3
   /data/prodege-2.3/prodege_install.sh -i /data/prodege-2.3
