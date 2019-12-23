@@ -27,6 +27,8 @@ RUN chmod -R a+rw /kb/module
 
 WORKDIR /kb/module
 
+ENV PERL5LIB=/kb/module/lib/kb_prodege/bin/prodege-2.3/lib:$PERL5LIB
+
 RUN make all
 
 ENTRYPOINT [ "./scripts/entrypoint.sh" ]
