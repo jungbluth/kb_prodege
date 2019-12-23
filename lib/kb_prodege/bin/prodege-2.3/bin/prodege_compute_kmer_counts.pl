@@ -1,4 +1,5 @@
 #!/usr/bin/env perl
+
 #ProDeGe Copyright (c) 2014, The Regents of the University of California,
 #through Lawrence Berkeley National Laboratory (subject to receipt of any
 #required approvals from the U.S. Dept. of Energy).  All rights reserved.
@@ -13,7 +14,7 @@ use List::MoreUtils ':all';
 
 # ARG1 Sequence
 # ARG2 Word Length
-# ARG3 Reference to array containing all words found in fasta 
+# ARG3 Reference to array containing all words found in fasta
 # Returns a reference to the hash containing frequency of all words
 sub getWordCountsSCD ($$$) {
   my $str=$_[1];
@@ -65,7 +66,7 @@ sub getWordCountsSCD ($$$) {
   return $array;
 }
 
- 
+
 unless(@ARGV==3) {
   print "Usage: $0 <directory of fasta file> <k> <jobname>\n"; exit;
 }

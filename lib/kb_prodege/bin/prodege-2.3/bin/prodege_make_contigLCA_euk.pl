@@ -1,4 +1,5 @@
 #!/usr/bin/env perl
+
 #ProDeGe Copyright (c) 2014, The Regents of the University of California,
 #through Lawrence Berkeley National Laboratory (subject to receipt of any
 #required approvals from the U.S. Dept. of Energy).  All rights reserved.
@@ -36,8 +37,8 @@ while($line=<STA>){
 	my @a=split(/\t/,$line);
 	if($a[3]>=.5 and $a[1]>2){
 		$stats{$a[0]}=1;
-	}	
-}	
+	}
+}
 close(STA);
 
 
@@ -83,7 +84,7 @@ while($line=<IN>){
 					$tree{$node}{'nc'}=0;
 					$tree{$node}{'tc'}=0;
 				}
-				else{	
+				else{
 					if(exists($etree{$node})){
 						if($node!~/root/){
 							$tree{$pnode}{'tc'}=$tree{$pnode}{'tc'}+1;
@@ -96,7 +97,7 @@ while($line=<IN>){
 						$tree{$node}{'p'}=$pnode;
 						$tree{$node}{'nc'}=0;
                                                 $tree{$node}{'tc'}=0;
-					}	
+					}
 				}
 				$pnode=$node;
 				$etree{$node}=1;
@@ -129,10 +130,10 @@ while($line=<IN>){
        				        $node=$tree{$node}{$i};
 					$found=1;
 					last;
-				}		
+				}
 			}
 			if($found==0){
-				last;	
+				last;
 			}
 		}
 		else{

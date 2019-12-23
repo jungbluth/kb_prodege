@@ -1,4 +1,5 @@
 #!/usr/bin/env perl
+
 #ProDeGe Copyright (c) 2014, The Regents of the University of California,
 #through Lawrence Berkeley National Laboratory (subject to receipt of any
 #required approvals from the U.S. Dept. of Energy).  All rights reserved.
@@ -53,7 +54,7 @@ while(my $line=<IN>){
 		}else{
 			$bh{$arr[1]}=1;
 		}
-	}	
+	}
 }
 close(IN);
 
@@ -91,7 +92,7 @@ my $last_key="initialized";
 my $bin_target="initialized";
 for(my $i=0;$i<scalar(@sorted_bhkeys);$i++){
 	my $key=$sorted_bhkeys[$i];
-        if($key!~/^Bacteria;$/ and $key!~/^Archaea;$/ and $key!~/^$/ and $key!~/^;$/){		
+        if($key!~/^Bacteria;$/ and $key!~/^Archaea;$/ and $key!~/^$/ and $key!~/^;$/){
 		#print "#$bh{$key}# \t #$known_target# \t #$key#\n#$full_known_target#\n";
 		if($full_known_target=~/$key/ and $bh{$key}>2){
 	                $bin_target=$full_known_target;
@@ -113,7 +114,7 @@ if(!exists($bh{$bin_target})){
 }
 
 if(!exists($bh{$bin_target})){
-        my @ba=split(/;/,$bin_target); 
+        my @ba=split(/;/,$bin_target);
 	pop(@ba);
 	my $nbh=join(";",@ba) . ";";
         my $c=()=$nbh=~/;/g;
@@ -130,10 +131,10 @@ if($bin_target!~/initialized/){
 	open(OUT,">$outfile");
 	#total number of contigs, number of contigs in this bin, percentage in bin target, bin target
 	print OUT $tlines . "\t" ;
-	print OUT $bh{$bin_target} . "\t"; 
+	print OUT $bh{$bin_target} . "\t";
 	print OUT sprintf("%.3f",$bh{$bin_target}/$tlines) . "\t";
 	print OUT $bin_target . "\n";
-	close(OUT); 
+	close(OUT);
   }
 }
 print LOG "Binning target is $bin_target.\n";

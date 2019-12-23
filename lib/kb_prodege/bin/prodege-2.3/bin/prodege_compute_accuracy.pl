@@ -1,4 +1,5 @@
 #!/usr/bin/env perl
+
 #ProDeGe Copyright (c) 2014, The Regents of the University of California,
 #through Lawrence Berkeley National Laboratory (subject to receipt of any
 #required approvals from the U.S. Dept. of Energy).  All rights reserved.
@@ -56,7 +57,7 @@ while (my $seqobj=$in->next_seq()){
 my $in2=Bio::SeqIO->new(-file => "$outcontam" ,  -format => 'Fasta');
 while (my $seqobj2=$in2->next_seq()){
         if($seqobj2->display_id()=~/clean/){
-                $fn++;  
+                $fn++;
                 $nfn=$nfn+$seqobj2->length;
         }
         elsif($seqobj2->display_id()=~/contam/){
@@ -85,12 +86,12 @@ if(-e $blastcontam){
 	}
 	close(IN);
 }
- 
+
 my $txt="prodege2.3";
 open(OUT,">>$log");
 if($tp+$tn+$fp+$fn != $realclean+$realcontam){
 	print OUT "Error in accuracy computation\n";
-} 
+}
 print OUT "$txt\t";
 print OUT "$jobname\t";
 #print OUT $tp+$tn+$fp+$fn . "\t";
@@ -114,5 +115,3 @@ close(OUT);
 #my $cmd="tail -1 $log >> $txt";
 #system($cmd);
 1;
-
-
