@@ -32,7 +32,7 @@ if(-e $fbin_target){
 
   my %cl;
   my @counts=(0,0,0);
-  my $contigLCA=$int_dir . $jobname . "_contigs.LCA"; 
+  my $contigLCA=$int_dir . $jobname . "_contigs.LCA";
   my $blast_clean=$int_dir . $jobname . "_blast_clean_contigs";
   my $blast_contam=$int_dir . $jobname . "_blast_contam_contigs";
   my $blast_undecided=$int_dir . $jobname . "_blast_undecided_contigs";
@@ -43,77 +43,77 @@ if(-e $fbin_target){
   my %species;
   open(IN,$species_file) or die;
   while(my $line=<IN>){
-	chomp($line);
-	my @arr=split(/,/,$line);
-	$species{$arr[0]}=$line;
+	  chomp($line);
+	  my @arr=split(/,/,$line);
+	  $species{$arr[0]}=$line;
   }
   close(IN);
- 
+
   my %eukcontam;
   if(-e $blast_contam){
     open(IN,$blast_contam);
     while(my $line=<IN>){
-	chomp($line);
-	$eukcontam{$line}=1;
-	$counts[2]++; #contam
-   }
+	    chomp($line);
+	    $eukcontam{$line}=1;
+	    $counts[2]++; #contam
+    }
     close(IN);
   }
- 
+
   open(IN,$contigLCA) or die;
   open(OUTC,">$blast_clean");
   open(OUTD,">>$blast_contam");
   open(OUTU,">$blast_undecided");
   while(my $line=<IN>){
-	chomp($line);
-        my @arr=split(/\t/,$line);
-	if(exists($eukcontam{$arr[0]})){
-		next;
-        }
-        if(defined($arr[1])){
-        	$arr[1]=~s/^ //;
-		$cl{$arr[0]}=$arr[1];
-		if($arr[1]=~/$bin_target/){
-			print OUTC "$arr[0]\n";
-                	$counts[0]++; #clean
-			$checkclean{$arr[0]}=1;
-		}
-                elsif($bin_target=~/$arr[1]/){
-                        if($species{$arr[0]}=~/$bin_target/){
+	  chomp($line);
+    my @arr=split(/\t/,$line);
+	  if(exists($eukcontam{$arr[0]})){
+		  next;
+    }
+    if(defined($arr[1])){
+      $arr[1]=~s/^ //;
+		  $cl{$arr[0]}=$arr[1];
+		  if($arr[1]=~/$bin_target/){
+			  print OUTC "$arr[0]\n";
+        $counts[0]++; #clean
+			  $checkclean{$arr[0]}=1;
+		  }
+    elsif($bin_target=~/$arr[1]/){
+      if($species{$arr[0]}=~/$bin_target/){
 				my $c=()=$species{$arr[0]}=~/$bin_target/g;
 				my $g=()=$species{$arr[0]}=~/,/g;
 				if($g==0){
-                                	print OUTU "$arr[0]\n";
-                                        $counts[1]++; #undecided
+          print OUTU "$arr[0]\n";
+          $counts[1]++; #undecided
 				}
-				elsif($g<=20){
-					if($c/$g>=.1){
-                        			print OUTC "$arr[0]\n";
-						print LOG "$arr[0] <=20 now clean\n";
-                        			$counts[0]++; #clean
-						$checkclean{$arr[0]}=1;
-					}
-					else{
-						print OUTU "$arr[0]\n";
-                                                print LOG "$arr[0] <=20 still undecided\n";
-						$counts[1]++; #undecided
-					}
+			elsif($g<=20){
+				if($c/$g>=.1){
+          print OUTC "$arr[0]\n";
+					print LOG "$arr[0] <=20 now clean\n";
+          $counts[0]++; #clean
+					$checkclean{$arr[0]}=1;
 				}
-				else{
-                                       if($c/$g>=.5){
-                                                print OUTC "$arr[0]\n";
-                                                print LOG "$arr[0] >20 now clean\n";
-                                                $counts[0]++; #clean
-						$checkclean{$arr[0]}=1;
-                                        }
-                                        else{
-                                                print OUTU "$arr[0]\n";
-                                                print LOG "$arr[0] >20 still undecided\n";
-                                                $counts[1]++; #undecided
-                                        }
-				}
-			}
-			else{
+			  else{
+			    print OUTU "$arr[0]\n";
+          print LOG "$arr[0] <=20 still undecided\n";
+				  $counts[1]++; #undecided
+			  }
+		  }
+		else{
+      if($c/$g>=.5){
+        print OUTC "$arr[0]\n";
+        print LOG "$arr[0] >20 now clean\n";
+        $counts[0]++; #clean
+				$checkclean{$arr[0]}=1;
+      }
+      else{
+        print OUTU "$arr[0]\n";
+        print LOG "$arr[0] >20 still undecided\n";
+        $counts[1]++; #undecided
+      }
+		}
+	}
+	else{
                                 print OUTU "$arr[0]\n";
                                 $counts[1]++; #undecided
 			}
@@ -146,15 +146,16 @@ if(-e $fbin_target){
   }
   if($counts[0]==0 or $known_target=~/^Bacteria;$/ or $known_target=~/^Archaea;$/ ){
         print LOG "prodege_classify.pl: Clean bin is empty.  Using 9-mer with standard cutoff.\n";
-	$cmd="perl $bin/prodege_compute_kmer_counts.pl $wdir 9 $jobname; $RCmd CMD BATCH -" . $lib . " -" . $wdir . " -" . 9 . " -" . $jobname .  " -" . $kcutoff . " --no-save " . $bin . "/prodege_classify_noclean.R " . $int_dir . $jobname . "_prodege_classify.out";
+	$cmd="perl $bin/prodege_compute_kmer_counts.pl $wdir 9 $jobname; R CMD BATCH -" . $lib . " -" . $wdir . " -" . 9 . " -" . $jobname .  " -" . $kcutoff . " --no-save " . $bin . "/prodege_classify_noclean.R " . $int_dir . $jobname . "_prodege_classify.out";
   }
   elsif($counts[2]==0){
         print LOG "prodege_classify.pl: Blast contam bin is empty, cannot precalibrate.  Using 5-mer with standard cutoff.\n";
-        $cmd="perl $bin/prodege_compute_kmer_counts.pl $wdir 5 $jobname; $RCmd CMD BATCH -" . $lib . " -" . $wdir . " -" . 5 . " -" . $jobname . " -" . $kcutoff . " --no-save " . $bin . "/prodege_classify_nocontam.R " . $int_dir . $jobname . "_prodege_classify.out";
+        $cmd="perl $bin/prodege_compute_kmer_counts.pl $wdir 5 $jobname; R CMD BATCH -" . $lib . " -" . $wdir . " -" . 5 . " -" . $jobname . " -" . $kcutoff . " --no-save " . $bin . "/prodege_classify_nocontam.R " . $int_dir . $jobname . "_prodege_classify.out";
   }
   else{
         print LOG "prodege_classify.pl: Using 5-mer with refined calibration.\n";
-        $cmd="perl $bin/prodege_compute_kmer_counts.pl $wdir 5 $jobname; $RCmd CMD BATCH -" . $lib . " -" . $wdir . " -" . 5 . " -" . $jobname . " -" . $kcutoff . " --no-save " . $bin . "/prodege_classify_cleanandcontam.R " . $int_dir . $jobname . "_prodege_classify.out";
+        $cmd="perl $bin/prodege_compute_kmer_counts.pl $wdir 5 $jobname; R CMD BATCH -" . $lib . " -" . $wdir . " -" . 5 . " -" . $jobname . " -" . $kcutoff . " --no-save " . $bin . "/prodege_classify_cleanandcontam.R " . $int_dir . $jobname . "_prodege_classify.out";
+        print LOG "command is: $cmd"
   }
   system($cmd);
 
@@ -172,7 +173,7 @@ if(-e $fbin_target){
 		}
 		else{
 			#print "$line $cl{$line} $known_target\n";
-			print OUT $line . "\n";	
+			print OUT $line . "\n";
 		}
 	}
 	else{
@@ -190,7 +191,7 @@ if(-e $fbin_target){
 }
 else{
   print LOG "prodege_classify.pl: No binning target.  Using 9-mer with standard cutoff.\n";
-  my $cmd="perl $bin/prodege_compute_kmer_counts.pl $wdir 9 $jobname; $RCmd CMD BATCH -" . $lib . " -" . $wdir . " -" . 9 . " -" . $jobname . " -" . $kcutoff . " --no-save " . $bin . "/prodege_classify_nobintarget.R " . $int_dir . $jobname . "_prodege_classify.out";
+  my $cmd="perl $bin/prodege_compute_kmer_counts.pl $wdir 9 $jobname; R CMD BATCH -" . $lib . " -" . $wdir . " -" . 9 . " -" . $jobname . " -" . $kcutoff . " --no-save " . $bin . "/prodege_classify_nobintarget.R " . $int_dir . $jobname . "_prodege_classify.out";
   system($cmd);
 }
 

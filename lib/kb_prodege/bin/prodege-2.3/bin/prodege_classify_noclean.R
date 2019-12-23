@@ -1,4 +1,6 @@
-#R CMD BATCH -dir -k --no-save kmer.R kmer.out 
+#!/usr/bin/env Rscript
+
+#R CMD BATCH -dir -k --no-save kmer.R kmer.out
 #ProDeGe Copyright (c) 2014, The Regents of the University of California,
 #through Lawrence Berkeley National Laboratory (subject to receipt of any
 #required approvals from the U.S. Dept. of Energy).  All rights reserved.
@@ -38,7 +40,7 @@ out_pca=paste(int_dir,jobname,"_contigs_",k,"mer.pca",sep="")
 write.table(pca$x[,1:3],out_pca,quote=F,append=F,row.names=F,col.names=F,sep="\t")
 d=sapply(1:nrow(x),function(j) dist(rbind(pca$x[j,],rep(0,(ncol(pca$x))))))
 if(cutoff=="DEFAULT"){
-        cutoff=0.01035 
+        cutoff=0.01035
         write.table(paste("prodege_classify_noclean.R: The precalibrated cutoff is ",cutoff,".",sep=""),out_log,append=T,row.names=F,col.names=F,quote=F)
 }else{
 	cutoff=as.numeric(cutoff)
@@ -62,7 +64,7 @@ if(file.exists(paste(int_dir,jobname,"_blast_clean_contigs",sep=""))){
 	w=which(mm[,5]=="clean")
 	write.table(mm[w,1],out_kmerclean,quote=F,append=F,row.names=F,col.names=F,sep="\t")
 	write.table(mm[-w,1],out_kmercontam,quote=F,append=F,row.names=F,col.names=F,sep="\t")
-	write.table(mm,out_dist,quote=F,append=F,row.names=F,col.names=F,sep="\t")	
+	write.table(mm,out_dist,quote=F,append=F,row.names=F,col.names=F,sep="\t")
 	write.table(cutoff,out_cutoff,append=F,row.names=F,col.names=F,quote=F)
 }else{
 	mm=cbind(n,d)

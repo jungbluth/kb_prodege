@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 #ProDeGe Copyright (c) 2014, The Regents of the University of California,
 #through Lawrence Berkeley National Laboratory (subject to receipt of any
 #required approvals from the U.S. Dept. of Energy).  All rights reserved.
@@ -15,10 +16,9 @@ tar -zxvf ${ndir}/taxdump.tar.gz
 rm ${ndir}/taxdump.tar.gz
 
 # Create the file for Prodege
-perl ${idir}/bin/01.createTaxSpeciesfile.pl $ndir 
+perl ${idir}/bin/01.createTaxSpeciesfile.pl $ndir
 
 # Delete unused files
 rm $ndir/*.dmp
 rm $ndir/*.prt
 rm $ndir/readme.txt
-

@@ -1,4 +1,6 @@
-#R CMD BATCH -dir -k --no-save kmer.R kmer.out 
+#!/usr/bin/env Rscript
+
+#R CMD BATCH -dir -k --no-save kmer.R kmer.out
 #ProDeGe Copyright (c) 2014, The Regents of the University of California,
 #through Lawrence Berkeley National Laboratory (subject to receipt of any
 #required approvals from the U.S. Dept. of Energy).  All rights reserved.
@@ -65,9 +67,9 @@ if(cutoff=="DEFAULT" && length(w)==0){
 	cutoff=min(as.numeric(as.character(mm[w,4])))
 	write.table(paste("prodege_classify_cleanandcontam.R: The calibrated cutoff is ",round(cutoff,4),".",sep=""),out_log,append=T,row.names=F,col.names=F,quote=F)
 }else{
-	cutoff=as.numeric(cutoff)	
+	cutoff=as.numeric(cutoff)
 	write.table(paste("prodege_classify_cleanandcontam.R: Your cutoff is ",round(cutoff,4),".",sep=""),out_log,append=T,row.names=F,col.names=F,quote=F)
-}	
+}
 print(cutoff)
 write.table(cutoff,out_cutoff,append=F,row.names=F,col.names=F,quote=F)
 #no to pca of only clean and unknown with new cutoff
@@ -84,10 +86,9 @@ w=which(as.numeric(as.character(mm[,4]))<cutoff)
 mm=cbind(mm,mm[,3])
 if(length(w)>0){
 	mm[w,5]="clean"
-}	
+}
 w=which(mm[,5]=="clean")
 write.table(mm,out_dist_post,sep='\t',row.names=F,col.names=F,quote=F)
 u=unique(mm[-w,1])
 write.table(mm[w,1],out_kmerclean,quote=F,append=F,row.names=F,col.names=F,sep="\t")
 write.table(u,out_kmercontam,quote=F,append=F,row.names=F,col.names=F,sep="\t")
-
