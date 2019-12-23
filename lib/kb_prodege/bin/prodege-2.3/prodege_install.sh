@@ -87,7 +87,7 @@ fi
 
 sh $CURR_DIR/bin/01.downloadTaxonomy.sh $INSTALL_DIR
 # sh $CURR_DIR/bin/02.getRpackages.sh $INSTALL_DIR
-# sh $CURR_DIR/bin/03.buildDatabases.sh $INSTALL_DIR
+sh $CURR_DIR/bin/03.buildDatabases.sh $INSTALL_DIR
 
 # if [[ ! -e $INSTALL_DIR/lib/BH/ || ! -e $INSTALL_DIR/lib/bigmemory.sri/ || ! -e $INSTALL_DIR/lib/bigmemory/ || ! -e $INSTALL_DIR/lib/biganalytics/ ]]
 # then
