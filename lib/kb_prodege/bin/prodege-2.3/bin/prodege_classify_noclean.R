@@ -40,11 +40,11 @@ out_pca=paste(int_dir,jobname,"_contigs_",k,"mer.pca",sep="")
 write.table(pca$x[,1:3],out_pca,quote=F,append=F,row.names=F,col.names=F,sep="\t")
 d=sapply(1:nrow(x),function(j) dist(rbind(pca$x[j,],rep(0,(ncol(pca$x))))))
 if(cutoff=="DEFAULT"){
-        cutoff=0.01035
-        write.table(paste("prodege_classify_noclean.R: The precalibrated cutoff is ",cutoff,".",sep=""),out_log,append=T,row.names=F,col.names=F,quote=F)
-}else{
+  cutoff=0.01035
+  write.table(paste("prodege_classify_noclean.R: The precalibrated cutoff is ",cutoff,".",sep=""),out_log,append=T,row.names=F,col.names=F,quote=F)
+} else {
 	cutoff=as.numeric(cutoff)
-        write.table(paste("prodege_classify_noclean.R: Your cutoff is ",cutoff,".",sep=""),out_log,append=T,row.names=F,col.names=F,quote=F)
+  write.table(paste("prodege_classify_noclean.R: Your cutoff is ",cutoff,".",sep=""),out_log,append=T,row.names=F,col.names=F,quote=F)
 }
 if(file.exists(paste(int_dir,jobname,"_blast_clean_contigs",sep=""))){
 	sc=read.table(paste(int_dir,jobname,"_blast_clean_contigs",sep=""),header=F,sep="\t")
@@ -58,7 +58,7 @@ if(file.exists(paste(int_dir,jobname,"_blast_clean_contigs",sep=""))){
 	ctm=rep("contam",nrow(mm))
 	w=which(mm$d<cutoff)
 	if(length(w)>0){
- 	       ctm[w]="clean"
+    ctm[w]="clean"
 	}
 	mm=cbind(mm,ctm)
 	w=which(mm[,5]=="clean")
@@ -66,22 +66,22 @@ if(file.exists(paste(int_dir,jobname,"_blast_clean_contigs",sep=""))){
 	write.table(mm[-w,1],out_kmercontam,quote=F,append=F,row.names=F,col.names=F,sep="\t")
 	write.table(mm,out_dist,quote=F,append=F,row.names=F,col.names=F,sep="\t")
 	write.table(cutoff,out_cutoff,append=F,row.names=F,col.names=F,quote=F)
-}else{
+} else {
 	mm=cbind(n,d)
 	ctm=rep("contam",nrow(mm))
 	w=which(mm$d<cutoff)
 	if(length(w)>0){
-        	ctm[w]="clean"
+    ctm[w]="clean"
 	}
 	mm=cbind(mm,ctm)
 	w=which(mm[,3]=="clean")
 	if(length(w)>0){
-        	write.table(mm[w,1],out_kmerclean,quote=F,append=F,row.names=F,col.names=F,sep="\t")
-        	write.table(mm[-w,1],out_kmercontam,quote=F,append=F,row.names=F,col.names=F,sep="\t")
-	}else{
-        	write.table(mm[,1],out_kmercontam,quote=F,append=F,row.names=F,col.names=F,sep="\t")
-        	f=file(out_kmerclean, "w")
-        	close(f)
+    write.table(mm[w,1],out_kmerclean,quote=F,append=F,row.names=F,col.names=F,sep="\t")
+    write.table(mm[-w,1],out_kmercontam,quote=F,append=F,row.names=F,col.names=F,sep="\t")
+	} else {
+    write.table(mm[,1],out_kmercontam,quote=F,append=F,row.names=F,col.names=F,sep="\t")
+    f=file(out_kmerclean, "w")
+    close(f)
 	}
 	write.table(mm,out_dist,quote=F,append=F,row.names=F,col.names=F,sep="\t")
 	write.table(cutoff,out_cutoff,append=F,row.names=F,col.names=F,quote=F)

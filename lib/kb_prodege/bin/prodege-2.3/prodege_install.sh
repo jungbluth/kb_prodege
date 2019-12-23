@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 #ProDeGe Copyright (c) 2014, The Regents of the University of California,
 #through Lawrence Berkeley National Laboratory (subject to receipt of any
 #required approvals from the U.S. Dept. of Energy).  All rights reserved.
@@ -14,8 +15,7 @@ usage()
   echo   -i	installation_directory
 }
 
-if [[ $# -eq 0 ]]
-then
+if [[ $# -eq 0 ]]; then
   usage
   exit
 fi
@@ -26,8 +26,7 @@ NCBI_TAX=
 IMG_DB=
 IMG_TAX=
 
-while getopts "hi:" OPTION
-do
+while getopts "hi:" OPTION; do
   case $OPTION in
     h)
       usage
@@ -43,14 +42,12 @@ do
   esac
 done
 
-if [[ -z $INSTALL_DIR ]]
-then
+if [[ -z $INSTALL_DIR ]]; then
   echo "An install directory was not specified."
   echo "I will proceed with installation in the current directory."
 fi
 
-if [ ! -e $INSTALL_DIR ]
-then
+if [ ! -e $INSTALL_DIR ]; then
   echo "Install directory $INSTALL_DIR does not exist."
   echo "Creating install directory now."
   mkdir -p $INSTALL_DIR
@@ -58,8 +55,7 @@ fi
 
 CURR_DIR=`pwd`
 
-if [[ $CURR_DIR != $INSTALL_DIR ]]
-then
+if [[ $CURR_DIR != $INSTALL_DIR ]]; then
   mkdir $INSTALL_DIR/bin
   mkdir $INSTALL_DIR/lib
   cp $CURR_DIR/lib/*.pm $INSTALL_DIR/lib/
@@ -73,23 +69,19 @@ then
 fi
 
 NCBI_NT=$INSTALL_DIR/NCBI-nt-euk
-if [ ! -e $NCBI_NT ]
-then
+if [ ! -e $NCBI_NT ]; then
   mkdir $NCBI_NT
 fi
 NCBI_TAX=$INSTALL_DIR/NCBI-nt-tax
-if [ ! -e $NCBI_TAX ]
-then
+if [ ! -e $NCBI_TAX ]; then
   mkdir $NCBI_TAX
 fi
 IMG_DB=$INSTALL_DIR/IMG-db
-if [ ! -e $IMG_DB ]
-then
+if [ ! -e $IMG_DB ]; then
   mkdir $IMG_DB
 fi
 IMG_TAX=$INSTALL_DIR/IMG-tax
-if [ ! -e $IMG_TAX ]
-then
+if [ ! -e $IMG_TAX ]; then
   mkdir $IMG_TAX
 fi
 

@@ -51,7 +51,7 @@ print(dim(x))
 w=which(!is.na(m[,3]))
 if(length(w)>0){
 	y=x[w,]
-}else{
+} else {
 	y=x
 }
 pca=prcomp(y)
@@ -63,10 +63,10 @@ print(cutoff)
 if(cutoff=="DEFAULT" && length(w)==0){
 	cutoff=0.0136
 	write.table(paste("prodege_classify_cleanandcontam.R: The precalibrated cutoff is ",round(cutoff,4),".",sep=""),out_log,append=T,row.names=F,col.names=F,quote=F)
-}else if(cutoff=="DEFAULT"){
+} else if(cutoff=="DEFAULT") {
 	cutoff=min(as.numeric(as.character(mm[w,4])))
 	write.table(paste("prodege_classify_cleanandcontam.R: The calibrated cutoff is ",round(cutoff,4),".",sep=""),out_log,append=T,row.names=F,col.names=F,quote=F)
-}else{
+} else {
 	cutoff=as.numeric(cutoff)
 	write.table(paste("prodege_classify_cleanandcontam.R: Your cutoff is ",round(cutoff,4),".",sep=""),out_log,append=T,row.names=F,col.names=F,quote=F)
 }
@@ -75,9 +75,9 @@ write.table(cutoff,out_cutoff,append=F,row.names=F,col.names=F,quote=F)
 #no to pca of only clean and unknown with new cutoff
 w=which(m[,3]=="clean"|is.na(m[,3]))
 if(length(w)>0){
-        y=x[w,]
-}else{
-        y=x
+  y=x[w,]
+} else {
+  y=x
 }
 pca=prcomp(y)
 d=sapply(1:nrow(y),function(j) dist(rbind(pca$x[j,],rep(0,(ncol(pca$x))))))

@@ -1,4 +1,4 @@
-#!/usr/bin/env R
+#!/usr/bin/env Rscript
 
 #R CMD BATCH -dir -k --no-save kmer.R kmer.out
 #ProDeGe Copyright (c) 2014, The Regents of the University of California,
@@ -72,21 +72,21 @@ if(cutoff=="DEFAULT"){
 	#cutoff=0.01085 #for 8
 	#cutoff=0.0111 #for 7
 	write.table(paste("prodege_classify_nobintarget.R: The precalibrated cutoff is ",cutoff,".",sep=""),out_log,append=T,row.names=F,col.names=F,quote=F)
-}else{
+} else {
 	cutoff=as.numeric(cutoff)
 	write.table(paste("prodege_classify_nobintarget.R: Your cutoff is ",cutoff,".",sep=""),out_log,append=T,row.names=F,col.names=F,quote=F)
 }
 w=which(mm$d<cutoff)
 if(length(w)>0){
-        ctm[w]="clean"
+  ctm[w]="clean"
 }
 mm=cbind(mm,ctm)
 w=which(mm[,3]=="clean")
 if(length(w)>0){
 	write.table(mm[w,1],out_kmerclean,quote=F,append=F,row.names=F,col.names=F,sep="\t")
 	write.table(mm[-w,1],out_kmercontam,quote=F,append=F,row.names=F,col.names=F,sep="\t")
-}else{
-        write.table(mm[,1],out_kmercontam,quote=F,append=F,row.names=F,col.names=F,sep="\t")
+} else {
+  write.table(mm[,1],out_kmercontam,quote=F,append=F,row.names=F,col.names=F,sep="\t")
 	f=file(out_kmerclean, "w")
 	close(f)
 }

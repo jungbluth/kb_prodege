@@ -1,4 +1,5 @@
 #!/usr/bin/env perl
+
 use strict;
 use warnings;
 
@@ -14,7 +15,7 @@ sub getParentsRecursively {
 	my $t=${$nodes}{$cid}{'taxc'};
 	#if($t=~/^genus$/ or $t=~/^species$/ or $t=~/^family$/ or $t=~/^phylum$/ or $t=~/^class$/ or $t=~/^order$/ or $t=~/^superkingdom$/ or $cid==1 or $cid==131567){
 	if($t=~/^genus$/ or $t=~/^species$/ or $t=~/^family$/ or $t=~/^phylum$/ or $t=~/^class$/ or $t=~/^order$/ or $t=~/^superkingdom$/){
-		my $cname = ${$names}{$cid};	
+		my $cname = ${$names}{$cid};
 		push(@$line,$cname);
 	}
 	getParentsRecursively ( $pid, $nodes, $names, $line ) if ( $cid != 1 );
@@ -33,7 +34,7 @@ sub parsetax($) {
 				my $n=lc substr($f[1],1); #lc for Issue #52
 				$map{$id}=$n;
 			}
-		}		
+		}
 	}
 	else { # parse nodes.dmp
 		foreach my $line (@lines){
@@ -45,7 +46,7 @@ sub parsetax($) {
 		}
 	}
 	close($IN);
-	return \%map;	
+	return \%map;
 }
 
 my $map_names=parsetax($dir . "/names.dmp");
@@ -70,4 +71,3 @@ while(my $line=<IN>){
 close IN;
 close OUT;
 1;
-

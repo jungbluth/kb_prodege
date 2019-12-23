@@ -1,15 +1,15 @@
 #
 # define display information
 #
-name     : Predict prodege and biogeochemical functional traits using METABOLIC - v2.0
-subtitle : predict prodege and biogeochemical traits
-tooltip  : predict prodege and biogeochemical traits
+name     : Decontaminate genome using ProDeGe - v2.3
+subtitle : decontaminate genomes
+tooltip  : decontaminate genomes
 
-icon: METABOLIC_icon.png
+icon: Prodege_icon.png
 
 screenshots:
-    - METABOLIC_banner.png
-    - METABOLIC_workflow.png
+    - Prodege_workflow.png
+    - Prodege_PCA.jpg
 
 #
 # define a set of similar methods that might be useful to the user
@@ -17,14 +17,14 @@ screenshots:
 suggestions:
     apps:
         related:
-            [kb_hmmer]
+            []
         next:
             []
     methods:
         related:
             []
         next:
-            ["HMMER_EnvBioelement_Search", "HMMER_dbCAN_Search", "HMMER_MSA_Search", "HMMER_Local_MSA_Group_Search"]
+            []
 
 #
 # Configure the display and description of parameters

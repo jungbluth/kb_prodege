@@ -28,11 +28,11 @@ elif [ "${1}" = "init" ] ; then
 
   cd /data/prodege-2.3
   /data/prodege-2.3/prodege_install.sh -i /data/prodege-2.3
-  #if [ -f "/data/METABOLIC/pepunit.lib" ] ; then # need to make sure this file is present, wasn't working
-  touch /data/__READY__
-  #else
-  #  echo "Init failed"
-  #fi
+  if [ -f "/data/prodege-2.3/IMG-db/imgdb.nal" ] ; then
+    touch /data/__READY__
+  else
+    echo "Init failed"
+  fi
 elif [ "${1}" = "bash" ] ; then
   bash
 elif [ "${1}" = "report" ] ; then

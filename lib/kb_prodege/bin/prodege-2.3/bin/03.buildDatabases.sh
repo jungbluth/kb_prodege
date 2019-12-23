@@ -4,11 +4,10 @@
 #through Lawrence Berkeley National Laboratory (subject to receipt of any
 #required approvals from the U.S. Dept. of Energy).  All rights reserved.
 
-if [ -z "$MAKEBLASTDB_EXE" ];
-then
+if [ -z "$MAKEBLASTDB_EXE" ]; then
 	blastCmd=`module load blast+;which makeblastdb`
 else
-        blastCmd=$MAKEBLASTDB_EXE
+  blastCmd=$MAKEBLASTDB_EXE
 fi
 
 # Get all data from Prodege server
