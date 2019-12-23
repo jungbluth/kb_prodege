@@ -94,25 +94,24 @@ then
 fi
 
 sh $CURR_DIR/bin/01.downloadTaxonomy.sh $INSTALL_DIR
-sh $CURR_DIR/bin/02.getRpackages.sh $INSTALL_DIR
+# sh $CURR_DIR/bin/02.getRpackages.sh $INSTALL_DIR
 sh $CURR_DIR/bin/03.buildDatabases.sh $INSTALL_DIR
 
-if [[ ! -e $INSTALL_DIR/lib/BH/ || ! -e $INSTALL_DIR/lib/bigmemory.sri/ || ! -e $INSTALL_DIR/lib/bigmemory/ || ! -e $INSTALL_DIR/lib/biganalytics/ ]]
-then
-        echo "R packages not installed.  ProDeGe installation unsuccessful."
-elif [[ ! -s $NCBI_TAX/ncbi_taxonomy.txt ]]
-then
-	echo "NCBI Taxonomy not parsed.  ProDeGe installation unsuccessful."	
-elif [[ ! -s $IMG_TAX/img_taxonomy.txt ]]
-then
-        echo "IMG Taxonomy not installed.  ProDeGe installation unsuccessful."    
-elif [[ ! -s $NCBI_NT/nt_euks.00.nhr ]]
-then
-        echo "NCBI euk database not installed.  ProDeGe installation unsuccessful."    
-elif [[ ! -s $IMG_DB/imgdb.00.nhr ]]
-then
-        echo "IMG database not installed.  ProDeGe installation unsuccessful."    
-else
-        echo "Installation successful."
-fi
-
+# if [[ ! -e $INSTALL_DIR/lib/BH/ || ! -e $INSTALL_DIR/lib/bigmemory.sri/ || ! -e $INSTALL_DIR/lib/bigmemory/ || ! -e $INSTALL_DIR/lib/biganalytics/ ]]
+# then
+#         echo "R packages not installed.  ProDeGe installation unsuccessful."
+# elif [[ ! -s $NCBI_TAX/ncbi_taxonomy.txt ]]
+# then
+# 	echo "NCBI Taxonomy not parsed.  ProDeGe installation unsuccessful."
+# elif [[ ! -s $IMG_TAX/img_taxonomy.txt ]]
+# then
+#         echo "IMG Taxonomy not installed.  ProDeGe installation unsuccessful."
+# elif [[ ! -s $NCBI_NT/nt_euks.00.nhr ]]
+# then
+#         echo "NCBI euk database not installed.  ProDeGe installation unsuccessful."
+# elif [[ ! -s $IMG_DB/imgdb.00.nhr ]]
+# then
+#         echo "IMG database not installed.  ProDeGe installation unsuccessful."
+# else
+#         echo "Installation successful."
+# fi

@@ -109,7 +109,7 @@ if [ "${RUN_GENECALL}" == "1" ]
 then
 	if [ -z "$PRODIGAL_EXE" ]; 
 	then
-		PCmd=`module load prodigal;which prodigal`
+		PCmd=`which prodigal`
 	else
 		PCmd=$PRODIGAL_EXE
 	fi 
@@ -124,7 +124,7 @@ then
 	then
 		if [ -z "$BLASTN_EXE" ];
         	then
-               		blastCmd=`module load blast+;which blastn`	
+               		blastCmd=`which blastn`	
        		else
                		blastCmd=$BLASTN_EXE
        		fi
@@ -156,7 +156,7 @@ then
 	then
 		if [ -z "$R_EXE" ]; 
 		then
-			RCmd=`module load R;which R`
+			RCmd=`which R`
 		else
 			RCmd=$R_EXE
 		fi  
